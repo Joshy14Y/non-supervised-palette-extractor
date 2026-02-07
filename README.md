@@ -34,7 +34,7 @@ The model revealed patterns consistent with Japanese art history:
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/Joshy14Y/ukiyo-e-palette-generator.git](https://github.com/Joshy14Y/ukiyo-e-palette-generator.git)
+    git clone https://github.com/Joshy14Y/ukiyo-e-palette-generator.git
     cd ukiyo-e-palette-generator
     ```
 
