@@ -2,5 +2,6 @@ ipykernel
 ipywidgets
 matplotlib
 numpy
+pandas
 Pillow
 scikit-learn

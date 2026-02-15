@@ -1,70 +1,76 @@
-# 🎨 Ukiyo-e Palette Generator
+# 🎨 Chromatic Clustering for Artistic Palette Extraction
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue?style=for-the-badge&logo=python)
 ![Scikit-Learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn)
 ![Status](https://img.shields.io/badge/Status-Completed-success?style=for-the-badge)
 
-An **Unsupervised Machine Learning** pipeline designed to chromatically deconstruct Japanese art (*Ukiyo-e*). It uses **Dynamic Clustering (K-Means)** optimized via Silhouette analysis to extract color palettes that respect both visual complexity and historical woodblock printing techniques.
+An **Unsupervised Machine Learning pipeline** designed to extract and analyze color palettes from artworks using **multiple clustering paradigms**. The project compares **centroid-based, density-based, and mode-seeking algorithms** to study how different assumptions about color geometry and distribution shape the resulting palettes.
+
+Rather than treating clustering as a black box, the pipeline emphasizes **algorithmic interpretability**, showing how internal model mechanics are reflected directly in the visual and quantitative results.
 
 ---
 
-## 🇯🇵 Project Motivation
+## 🎯 Project Motivation
 
-*Ukiyo-e* art (Edo period) was produced by layering inked woodblocks. Unlike oil painting, this implies a **discrete nature** of color.
+Color in painting is not continuous in intent, even when it appears continuous perceptually. Artists work with **limited pigments, compositional constraints, and stylistic conventions**, which impose structure on the color space.
 
-This project uses clustering algorithms to perform **"reverse engineering"** on these artworks, attempting to mathematically recover the original inks used by masters like *Hiroshige* and *Kuniyoshi*, distinguishing between simple compositions (landscapes) and high-entropy scenes (battles/mythology).
+This project explores whether unsupervised clustering algorithms can:
+
+- recover dominant chromatic structures,
+- distinguish between **simple, geometric, and highly complex compositions**, and
+- expose how different clustering assumptions (global centroids, density, local modes) interpret the same artwork differently.
+
+By applying the same pipeline across diverse paintings and styles, the project performs a form of **computational color analysis**, bridging machine learning, visual perception, and art interpretation.
+
+---
 
 ## 🚀 Key Features
 
-* **Dynamic K Selection ($k \in [5, 10]$):** The model does not use a fixed number of colors. It iteratively evaluates the image structure and selects the optimal $K$ based on the **Silhouette Coefficient**.
-* **Visual Entropy Analysis:** Automatically differentiates between minimalist styles (*Fukei-ga*) and chaotic styles (*Musha-e*).
-* **Modular Pipeline:** Code structured in Classes (`FeatureExtractor`, `ColorGrouper`, `PaletteReporter`) with Type Hinting.
-* **Advanced Visualization:** Palette generation, image segmentation, and dimensionality reduction using **t-SNE**.
+- **Multi-Algorithm Clustering**
+  - **K-Means** (centroid-based, global partitioning)
+  - **DBSCAN** (density-based, structure-driven clustering)
+  - **Mean Shift** (mode-seeking, local density estimation)
 
-## 📊 Technical Findings
+- **Automatic Model Selection**
+  - Optimal configurations selected via the **Silhouette Coefficient**
+  - Enables objective comparison across algorithms and artworks
 
-The model revealed patterns consistent with Japanese art history:
+- **Style-Sensitive Behavior**
+  - Differentiates between:
+    - paintings with few dominant color fields,
+    - works with strong geometric segmentation,
+    - highly fragmented, high-entropy compositions
 
-| Style | Example Work | Detected K | Model Interpretation |
-| :--- | :--- | :---: | :--- |
-| **Landscape (Fukei-ga)** | *Hiroshige* | **5 - 6** | Detected "economy of means". Few, very compact and well-separated clusters, ideal for representing large gradient areas (*Bokashi*). |
-| **Complex (Musha-e)** | *The Magic Toads* | **9** | **Anomaly Detection.** Faced with high structural complexity (textile patterns, textures), the model scaled to $K=9$ to prevent information loss. |
+- **Modular, Reproducible Pipeline**
+  - `FeatureExtractor`: image preprocessing and pixel sampling
+  - `ColorGrouper`: clustering and model evaluation
+  - `PaletteReporter`: visualization, palette rendering, and validation
+
+- **Advanced Visualization**
+  - Extracted palettes with hex codes
+  - Silhouette curves for model selection
+  - **t-SNE projections** for visual validation of cluster structure
+
+---
+
+## 📊 Technical Observations
+
+The experiments reveal consistent relationships between **artistic structure** and **algorithmic behavior**:
+
+| Artwork Type | Typical Outcome | Algorithmic Interpretation |
+|--------------|----------------|----------------------------|
+| Minimal / Dominant Color Fields | Low optimal *k* | Few well-separated global modes; ideal for K-Means |
+| Geometric / Flat Color Regions | Moderate *k* | Stable centroid structure with clear boundaries |
+| Highly Fragmented / Textured | High *k* (Mean Shift) | Many local density maxima; micro-structure dominates |
+| Sparse Color Distributions | Very low effective clusters (DBSCAN) | Density-driven collapse into dominant modes |
+
+These results show that clustering outputs are not just palettes, but **diagnostics of visual structure**.
+
+---
 
 ## 🛠️ Installation & Usage
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/Joshy14Y/ukiyo-e-palette-generator.git
-    cd ukiyo-e-palette-generator
-    ```
-
-2.  **Install dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-3.  **File Structure:**
-    Ensure your images are in the correct folder:
-    ```text
-    ├── images/             # Place your 10 images here
-    ├── p1.ipynb            # Main notebook with the pipeline
-    ├── requirements.txt    # Dependencies
-    └── README.md           # Documentation
-    ```
-
-4.  **Run:**
-    Open `p1.ipynb` in Jupyter Lab or VS Code and execute the cells sequentially.
-
-## 📦 Tech Stack
-
-* **Core:** Python 3
-* **ML & Data:** `scikit-learn` (KMeans, Silhouette Score, t-SNE), `numpy`
-* **Image Processing:** `Pillow` (PIL)
-* **Visualization:** `matplotlib`
-
-## 📄 License
-
-This project was developed for academic purposes as part of an Unsupervised Machine Learning course.
-
----
-Developed by Joshua Sancho
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/color-clustering-art.git
+   cd color-clustering-art
