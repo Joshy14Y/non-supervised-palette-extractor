@@ -68,9 +68,35 @@ These results show that clustering outputs are not just palettes, but **diagnost
 
 ---
 
-## 🛠️ Installation & Usage
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-username/color-clustering-art.git
-   cd color-clustering-art
+## 🛠️ Installation & Usage 
+
+1. **Clone the repository:**
+bash
+    git clone https://github.com/Joshy14Y/ukiyo-e-palette-generator.git
+    cd ukiyo-e-palette-generator
+   
+2. **Install dependencies:**
+bash
+    pip install -r requirements.txt
+
+   
+3. **File Structure:** Ensure your images are in the correct folder:
+text
+    ├── images/             # Place your 10 images here
+    ├── p1.ipynb            # Main notebook with the pipeline
+    ├── requirements.txt    # Dependencies
+    └── README.md           # Documentation
+4. **Run:** Open p1.ipynb in Jupyter Lab or VS Code and execute the cells sequentially.
+
+## 📦 Tech Stack  
+* **Core:** Python 3 
+* **ML & Data:** scikit-learn (KMeans, Silhouette Score, t-SNE), numpy
+* **Image Processing:** Pillow (PIL)
+* **Visualization:** matplotlib
+
+## 📄 License
+
+This project was developed for academic purposes as part of an Unsupervised Machine Learning course. 
+
+--- Developed by Joshua Sancho & Andres Castellano
