@@ -84,12 +84,11 @@ bash
 3. **File Structure:** Ensure your images are in the correct folder:
 
 text
-
     ├── images/             # Place your 10 images here
-    ├── p1.ipynb            # Main notebook with the pipeline
+    ├── project.ipynb            # Main notebook with the pipeline
     ├── requirements.txt    # Dependencies
     └── README.md           # Documentation
-4. **Run:** Open p1.ipynb in Jupyter Lab or VS Code and execute the cells sequentially.
+4. **Run:** Open project.ipynb in Jupyter Lab or VS Code and execute the cells sequentially.
 
 ## 📦 Tech Stack  
 * **Core:** Python 3 
