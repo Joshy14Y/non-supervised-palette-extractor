@@ -82,7 +82,9 @@ bash
 
    
 3. **File Structure:** Ensure your images are in the correct folder:
+
 text
+
     ├── images/             # Place your 10 images here
     ├── p1.ipynb            # Main notebook with the pipeline
     ├── requirements.txt    # Dependencies
