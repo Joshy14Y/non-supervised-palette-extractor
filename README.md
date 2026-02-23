@@ -1,70 +1,39 @@
-# 🎨 Ukiyo-e Palette Generator
+# 🎨 Palette Extractor
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue?style=for-the-badge&logo=python)
 ![Scikit-Learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn)
 ![Status](https://img.shields.io/badge/Status-Completed-success?style=for-the-badge)
 
-An **Unsupervised Machine Learning** pipeline designed to chromatically deconstruct Japanese art (*Ukiyo-e*). It uses **Dynamic Clustering (K-Means)** optimized via Silhouette analysis to extract color palettes that respect both visual complexity and historical woodblock printing techniques.
+**Palette Extractor** es un pipeline avanzado de **Aprendizaje No Supervisado** diseñado para la deconstrucción cromática de obras de arte. Mediante una comparativa multialgoritmo, el sistema identifica la esencia tonal de cada pieza, permitiendo una transición fluida entre el análisis de arte tradicional y la abstracción moderna.
 
 ---
 
-## 🇯🇵 Project Motivation
+## 🔬 Enfoque Técnico: Comparativa Multialgoritmo
 
-*Ukiyo-e* art (Edo period) was produced by layering inked woodblocks. Unlike oil painting, this implies a **discrete nature** of color.
+El núcleo del proyecto evalúa tres arquitecturas de clustering para determinar cuál representa mejor la estructura visual de la obra:
 
-This project uses clustering algorithms to perform **"reverse engineering"** on these artworks, attempting to mathematically recover the original inks used by masters like *Hiroshige* and *Kuniyoshi*, distinguishing between simple compositions (landscapes) and high-entropy scenes (battles/mythology).
+* **K-Means (Centroides):** Optimizado mediante **Silhouette Analysis** ($k \in [2, 10]$). Ideal para identificar contrastes estructurales dominantes y colores base.
+* **HDBSCAN (Densidad):** Agrupamiento espacial que identifica clústeres de forma orgánica, gestionando el ruido visual sin requerir un número de clústeres predefinido.
+* **MeanShift (Modas):** Localiza picos de intensidad cromática, capturando con alta fidelidad los degradados y las transiciones sutiles de color.
 
-## 🚀 Key Features
+## 🚀 Características Principales
 
-* **Dynamic K Selection ($k \in [5, 10]$):** The model does not use a fixed number of colors. It iteratively evaluates the image structure and selects the optimal $K$ based on the **Silhouette Coefficient**.
-* **Visual Entropy Analysis:** Automatically differentiates between minimalist styles (*Fukei-ga*) and chaotic styles (*Musha-e*).
-* **Modular Pipeline:** Code structured in Classes (`FeatureExtractor`, `ColorGrouper`, `PaletteReporter`) with Type Hinting.
-* **Advanced Visualization:** Palette generation, image segmentation, and dimensionality reduction using **t-SNE**.
+* **Optimización Dinámica:** Selección automática de hiperparámetros basada en métricas de cohesión y separación (*Silhouette Score*).
+* **Visualización Científica:** Proyección de píxeles mediante **t-SNE** para validar matemáticamente la separabilidad de los colores extraídos.
+* **Arquitectura Limpia:** Implementación modular a través de la clase `PaletteReporter`, enfocada en código atómico y autodocumentado.
+* **Análisis de Complejidad:** Diferenciación automática entre composiciones minimalistas y escenas de alta entropía visual.
 
-## 📊 Technical Findings
+## 📊 Hallazgos Técnicos
 
-The model revealed patterns consistent with Japanese art history:
+| Algoritmo | Fortalezas | Caso de Uso Ideal |
+| :--- | :--- | :--- |
+| **K-Means** | Eficiencia y estructura clara. | Obras con bloques de color definidos. |
+| **HDBSCAN** | Estabilidad ante variaciones de densidad. | Arte con texturas y patrones complejos. |
+| **MeanShift** | Granularidad en micro-tonos. | Captura de gradientes y transiciones suaves. |
 
-| Style | Example Work | Detected K | Model Interpretation |
-| :--- | :--- | :---: | :--- |
-| **Landscape (Fukei-ga)** | *Hiroshige* | **5 - 6** | Detected "economy of means". Few, very compact and well-separated clusters, ideal for representing large gradient areas (*Bokashi*). |
-| **Complex (Musha-e)** | *The Magic Toads* | **9** | **Anomaly Detection.** Faced with high structural complexity (textile patterns, textures), the model scaled to $K=9$ to prevent information loss. |
+## 🛠️ Instalación y Uso
 
-## 🛠️ Installation & Usage
-
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/Joshy14Y/ukiyo-e-palette-generator.git
-    cd ukiyo-e-palette-generator
-    ```
-
-2.  **Install dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-3.  **File Structure:**
-    Ensure your images are in the correct folder:
-    ```text
-    ├── images/             # Place your 10 images here
-    ├── p1.ipynb            # Main notebook with the pipeline
-    ├── requirements.txt    # Dependencies
-    └── README.md           # Documentation
-    ```
-
-4.  **Run:**
-    Open `p1.ipynb` in Jupyter Lab or VS Code and execute the cells sequentially.
-
-## 📦 Tech Stack
-
-* **Core:** Python 3
-* **ML & Data:** `scikit-learn` (KMeans, Silhouette Score, t-SNE), `numpy`
-* **Image Processing:** `Pillow` (PIL)
-* **Visualization:** `matplotlib`
-
-## 📄 License
-
-This project was developed for academic purposes as part of an Unsupervised Machine Learning course.
-
----
-Developed by Joshua Sancho
+1. **Clonar el repositorio:**
+   ```bash
+   git clone [https://github.com/Joshy14Y/palette-extractor.git](https://github.com/Joshy14Y/palette-extractor.git)
+   cd palette-extractor
